@@ -45,7 +45,7 @@ bool Collector::compareSizeAndDir(const fs::path& file1, const fs::path& file2)
 void Collector::hashCompare(const fs::path& file)
 {
     bool compare = false;
-    for(const auto& name_vhash : all_path)
+    for(auto& name_vhash : all_path)
     {
         if(compareSizeAndDir(name_vhash.first,file))
         {
@@ -60,8 +60,8 @@ void Collector::hashCompare(const fs::path& file)
                 size_t i = 0;
                 for(;i<name_vhash.second.size();)
                 {
-                    all_path[file].second.emplace_back(hashFromBlock(is_one,i,count_block));
-                    if(name_vhash.second.at(i) == all_path[file].second.at(i)) 
+                    all_path[file].emplace_back(std::move(hashFromBlock(is_one,i,count_block)));
+                    if(name_vhash.second.at(i) == all_path[file].at(i)) 
                     {
                         iqual = true;
                         ++i;
@@ -80,9 +80,9 @@ void Collector::hashCompare(const fs::path& file)
                     {
                         for(;i < count_block;)
                         {
-                            all_path[file].second.emplace_back(hashFromBlock(is_one,i,count_block));
-                            name_vhash.second.emplace_back(hashFromBlock(is_two,i,count_block));
-                            if(name_vhash.second.at(i) == all_path[file].second.at(i)) 
+                            all_path[file].emplace_back(std::move(hashFromBlock(is_one,i,count_block)));
+                            name_vhash.second.emplace_back(std::move(hashFromBlock(is_two,i,count_block)));
+                            if(name_vhash.second.at(i) == all_path[file].at(i)) 
                             {
                                 iqual = true;
                                 ++i;
@@ -118,7 +118,7 @@ void Collector::hashCompare(const fs::path& file)
 }
 
 //-----Функция получения хэш из блока ----------------------------------------------------
-std::string Collector::hashFromBlock(const fstream& is, size_t i, size_t count_block)
+std::string Collector::hashFromBlock(std::fstream& is, size_t i, size_t count_block)
 {
     char* buffer = new char [opt->block];
 		if(i < count_block-1)
@@ -127,7 +127,10 @@ std::string Collector::hashFromBlock(const fstream& is, size_t i, size_t count_b
 			is.read (buffer,opt->block);
 		}
 		else
-		{
+		{   
+            is.seekg (0,is.end);
+            auto length_all = is.tellg();
+
 			is.seekg (i*opt->block, is.beg);
 			int length =length_all - is.tellg();
 			is.read (buffer,length);

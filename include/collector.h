@@ -6,6 +6,7 @@
 #include <regex>
 #include <algorithm>
 #include <boost/program_options.hpp>
+#include <fstream>
 
 
 #pragma once
@@ -31,7 +32,7 @@ class Collector
         bool maskCompare(const fs::path& dir);
         void hashCompare(const fs::path& file);
         bool compareSizeAndDir(const fs::path& file1, const fs::path& file2);
-        std::string hashFromBlock(const fstream& is, size_t i, size_t count_block);
+        std::string hashFromBlock(std::fstream& is, size_t i, size_t count_block);
 
 };
 
