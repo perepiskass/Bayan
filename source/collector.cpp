@@ -44,41 +44,102 @@ bool Collector::compareSizeAndDir(const fs::path& file1, const fs::path& file2)
 //-----Функция получения и сравнения хэш для блоков---------------------------------------
 void Collector::hashCompare(const fs::path& file)
 {
+    bool compare = false;
     for(const auto& name_vhash : all_path)
     {
         if(compareSizeAndDir(name_vhash.first,file))
         {
+            bool iqual = false;
             size_t count_block = fs::file_size(name_vhash.first)/opt->block;
             if(fs::file_size(name_vhash.first)%opt->block) ++count_block;
             
-            bool iqual = false;
-            for(size_t i = 0 ; i < count_block; ++i )
-            {
-                if(all_path[name_vhash.first].size() > i && !(all_path[file].size() > i))
+            // open file
+            std::fstream is_one (file.c_str(),std::ios_base::in | std::ios_base::binary);
+            if (is_one.is_open()) 
+            {   
+                size_t i = 0;
+                for(;i<name_vhash.second.size();)
                 {
-                    all_path[file].emplace_back(hashFromFile(i,file));
-                    if(name_vhash.second[i] == all_path[file][i]) iqual = true;
-                    else {iqual = false; break;}
+                    all_path[file].second.emplace_back(hashFromBlock(is_one,i,count_block));
+                    if(name_vhash.second.at(i) == all_path[file].second.at(i)) 
+                    {
+                        iqual = true;
+                        ++i;
+                    }
+                    else 
+                    {
+                        iqual = false;
+                        break;
+                    }
                 }
-                else if(!(all_path[name_vhash.first].size() > i) && !(all_path[file].size() > i))
+
+                if (iqual == true || name_vhash.second.empty())
                 {
-                    all_path[name_vhash.first].emplace_back(hashFromFile(i,name_vhash.first));
-                    all_path[file].emplace_back(hashFromFile(i,file));
-                    if(all_path[name_vhash.first][i] == all_path[file][i]) iqual = true;
-                    else {iqual = false; break;}
+                    std::fstream is_two (name_vhash.first.c_str(),std::ios_base::in | std::ios_base::binary);
+                    if(is_two.is_open())
+                    {
+                        for(;i < count_block;)
+                        {
+                            all_path[file].second.emplace_back(hashFromBlock(is_one,i,count_block));
+                            name_vhash.second.emplace_back(hashFromBlock(is_two,i,count_block));
+                            if(name_vhash.second.at(i) == all_path[file].second.at(i)) 
+                            {
+                                iqual = true;
+                                ++i;
+                            }
+                            else 
+                            {
+                                iqual = false;
+                                break;
+                            }
+
+                        }
+                    }
+                    else throw errno;
+                    is_two.close();
                 }
+                compare = true;
             }
+            else throw errno;
+            is_one.close();
+            //-----------------------------------------------------------------------------------------------
+                
             if(iqual)
             {
                 auto str = all_path.at(file).front() + all_path.at(file).back();
                 result[str].emplace_back(file);
                 auto it = std::find(std::begin(result[str]),std::end(result[str]),name_vhash.first);
                 if (it == std::end(result[str])) result[str].emplace_back(name_vhash.first);
+                break;
             }
         }
-        else all_path[file];
-
     }
+    if(!compare) all_path[file]; 
+}
+
+//-----Функция получения хэш из блока ----------------------------------------------------
+std::string Collector::hashFromBlock(const fstream& is, size_t i, size_t count_block)
+{
+    char* buffer = new char [opt->block];
+		if(i < count_block-1)
+		{
+			is.seekg (i*opt->block, is.beg);
+			is.read (buffer,opt->block);
+		}
+		else
+		{
+			is.seekg (i*opt->block, is.beg);
+			int length =length_all - is.tellg();
+			is.read (buffer,length);
+			for(uint i = length; i < opt->block; ++i)
+			{
+				buffer[i] = '\0';
+			}
+		}
+		
+		std::string hash_result = opt->hash->getHash(buffer,opt->block);
+		delete [] buffer;
+		return hash_result;
 }
 
 //-----Функция просмотра файлов и фильтрации папок и фалов по заданным параметрам---------------------
@@ -105,40 +166,3 @@ void Collector::iterateOverFiles(size_t depth, fs::path dir)
         }
 }
 
-//-----Получение хэша от размера блока заданного файла------------------------------------------
-std::string Collector::hashFromFile(size_t i,const fs::path& file)
-{
-	std::fstream is (file.c_str(),std::ios_base::in | std::ios_base::binary);
-  if (is.is_open()) 
-  {
-		// get length of file: Можно заменить на получение размера файла из boost::filesystem
-		is.seekg (0, is.end);
-		int length_all = is.tellg();
-		// get bloc count
-		size_t count_block = length_all/opt->block;
-		if(length_all%opt->block) ++count_block;
-
-		char* buffer = new char [opt->block];
-		if(i < count_block-1)
-		{
-			is.seekg (i*opt->block, is.beg);
-			is.read (buffer,opt->block);
-		}
-		else
-		{
-			is.seekg (i*opt->block, is.beg);
-			int length =length_all - is.tellg();
-			is.read (buffer,length);
-			for(uint i = length; i < opt->block; ++i)
-			{
-				buffer[i] = '\0';
-			}
-		}
-		is.close();
-		std::string hash_result;
-		hash_result = opt->hash->getHash(buffer,opt->block);
-		delete [] buffer;
-		return hash_result;
-  	}
-	else throw errno;
-}

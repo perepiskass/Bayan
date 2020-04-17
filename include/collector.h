@@ -31,7 +31,7 @@ class Collector
         bool maskCompare(const fs::path& dir);
         void hashCompare(const fs::path& file);
         bool compareSizeAndDir(const fs::path& file1, const fs::path& file2);
-        std::string hashFromFile(size_t i,const fs::path& file);
+        std::string hashFromBlock(const fstream& is, size_t i, size_t count_block);
 
 };
 
