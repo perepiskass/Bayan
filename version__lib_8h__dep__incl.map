@@ -1,9 +1,9 @@
 <map id="include/version_lib.h" name="include/version_lib.h">
-<area shape="rect" id="node2" href="$options_8h.html" title="include/options.h" alt="" coords="337,80,468,107"/>
-<area shape="rect" id="node5" href="$gtest_8cpp.html" title="source/gtest.cpp" alt="" coords="331,229,461,256"/>
-<area shape="rect" id="node8" href="$version__lib_8cpp.html" title="source/version_lib.cpp" alt="" coords="604,80,767,107"/>
-<area shape="rect" id="node3" href="$collector_8h.html" title="include/collector.h" alt="" coords="175,155,311,181"/>
-<area shape="rect" id="node7" href="$options_8cpp.html" title="source/options.cpp" alt="" coords="386,155,529,181"/>
-<area shape="rect" id="node4" href="$collector_8cpp.html" title="source/collector.cpp" alt="" coords="5,229,155,256"/>
-<area shape="rect" id="node6" href="$main_8cpp.html" title="source/main.cpp" alt="" coords="179,229,307,256"/>
+<area shape="rect" id="node2" href="$options_8h.html" title="include/options.h" alt="" coords="341,80,474,107"/>
+<area shape="rect" id="node5" href="$gtest_8cpp.html" title="source/gtest.cpp" alt="" coords="333,229,463,256"/>
+<area shape="rect" id="node8" href="$version__lib_8cpp.html" title="source/version_lib.cpp" alt="" coords="609,80,776,107"/>
+<area shape="rect" id="node3" href="$collector_8h.html" title="include/collector.h" alt="" coords="175,155,315,181"/>
+<area shape="rect" id="node7" href="$options_8cpp.html" title="source/options.cpp" alt="" coords="390,155,534,181"/>
+<area shape="rect" id="node4" href="$collector_8cpp.html" title="source/collector.cpp" alt="" coords="5,229,156,256"/>
+<area shape="rect" id="node6" href="$main_8cpp.html" title="source/main.cpp" alt="" coords="180,229,309,256"/>
 </map>
