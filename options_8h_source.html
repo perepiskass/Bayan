@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.11"/>
+<title>Bayan: Исходный файл include/options.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Bayan
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.11 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Титульная&#160;страница</span></a></li>
+      <li><a href="annotated.html"><span>Классы</span></a></li>
+      <li class="current"><a href="files.html"><span>Файлы</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Поиск" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Файлы</span></a></li>
+      <li><a href="globals.html"><span>Список&#160;членов&#160;всех&#160;файлов</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">options.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="options_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;regex&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;map&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;boost/filesystem.hpp&gt;</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;boost/program_options.hpp&gt;</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="hashfunction_8h.html">hashfunction.h</a>&quot;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="version__lib_8h.html">version_lib.h</a>&quot;</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">namespace </span>po = boost::program_options;</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">namespace </span>fs = boost::filesystem;</div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="options_8h.html#a5ffc8364f77b2ca5f46409119de3d208">   16</a></span>&#160;<span class="keyword">using</span> <a class="code" href="options_8h.html#a5ffc8364f77b2ca5f46409119de3d208">strings</a> = std::vector&lt;std::string&gt;;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="classOptions.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classOptions.html">Options</a></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classOptions.html#a4a5512c848957ee6cb49de4c69d2af9e">   24</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classOptions.html#a4a5512c848957ee6cb49de4c69d2af9e">size</a>;        </div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classOptions.html#a3fdb0491f8cebf0a8d1127d6728e8029">   25</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classOptions.html#a3fdb0491f8cebf0a8d1127d6728e8029">block</a>;       </div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classOptions.html#a2849dc13d06cc0fc4e3297be003899b4">   26</a></span>&#160;        <span class="keywordtype">size_t</span> <a class="code" href="classOptions.html#a2849dc13d06cc0fc4e3297be003899b4">depth</a>;       </div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classOptions.html#a40c0cb1a9e5407df0e9ed3b786b7ea0c">   27</a></span>&#160;        std::vector&lt;fs::path&gt; <a class="code" href="classOptions.html#a40c0cb1a9e5407df0e9ed3b786b7ea0c">paths</a>;        </div><div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classOptions.html#aad972d4c36c16869687c5efc5d0a5f10">   28</a></span>&#160;        std::vector&lt;fs::path&gt; <a class="code" href="classOptions.html#aad972d4c36c16869687c5efc5d0a5f10">exc_paths</a>;    </div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classOptions.html#a34a6a8752d1ef2021cce84902d2a89d7">   29</a></span>&#160;        std::vector&lt;std::regex&gt; <a class="code" href="classOptions.html#a34a6a8752d1ef2021cce84902d2a89d7">v_regex</a>;    </div><div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classOptions.html#afc5d30d1c9b4b9d744caee2d01ad3f63">   30</a></span>&#160;        <a class="code" href="classHFunction.html">HFunction</a>* <a class="code" href="classOptions.html#afc5d30d1c9b4b9d744caee2d01ad3f63">hash</a> = <span class="keyword">nullptr</span>;</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classOptions.html#ab3a4819d972a234777923d85122bcf37">Options</a>(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> *argv[]);</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classOptions.html#a86ddb85b183f8b58af5481f30a42fa92">~Options</a>();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">void</span> setMasks(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; masks);</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="keywordtype">void</span> setPath(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; paths);</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordtype">void</span> setExceptPath(<span class="keyword">const</span> std::vector&lt;std::string&gt;&amp; exc_paths);</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordtype">void</span> setHash(<span class="keyword">const</span> std::string hash_name);</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        std::regex makeRegex(<span class="keyword">const</span> std::string&amp; mask);</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordtype">bool</span> checkPath(<span class="keyword">const</span> std::string&amp; path);</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;};</div><div class="ttc" id="classOptions_html_a86ddb85b183f8b58af5481f30a42fa92"><div class="ttname"><a href="classOptions.html#a86ddb85b183f8b58af5481f30a42fa92">Options::~Options</a></div><div class="ttdeci">~Options()</div><div class="ttdef"><b>Definition:</b> options.cpp:47</div></div>
+<div class="ttc" id="classOptions_html_ab3a4819d972a234777923d85122bcf37"><div class="ttname"><a href="classOptions.html#ab3a4819d972a234777923d85122bcf37">Options::Options</a></div><div class="ttdeci">Options(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> options.cpp:3</div></div>
+<div class="ttc" id="version__lib_8h_html"><div class="ttname"><a href="version__lib_8h.html">version_lib.h</a></div></div>
+<div class="ttc" id="options_8h_html_a5ffc8364f77b2ca5f46409119de3d208"><div class="ttname"><a href="options_8h.html#a5ffc8364f77b2ca5f46409119de3d208">strings</a></div><div class="ttdeci">std::vector&lt; std::string &gt; strings</div><div class="ttdef"><b>Definition:</b> options.h:16</div></div>
+<div class="ttc" id="classOptions_html_a34a6a8752d1ef2021cce84902d2a89d7"><div class="ttname"><a href="classOptions.html#a34a6a8752d1ef2021cce84902d2a89d7">Options::v_regex</a></div><div class="ttdeci">std::vector&lt; std::regex &gt; v_regex</div><div class="ttdoc">Хранит список регулярных выражений для применеия фильтра маски файла </div><div class="ttdef"><b>Definition:</b> options.h:29</div></div>
+<div class="ttc" id="classOptions_html_a4a5512c848957ee6cb49de4c69d2af9e"><div class="ttname"><a href="classOptions.html#a4a5512c848957ee6cb49de4c69d2af9e">Options::size</a></div><div class="ttdeci">size_t size</div><div class="ttdoc">Миниальный размер блока файла для сканирования, задается по умолчанию в конструкторе (1 байт) ...</div><div class="ttdef"><b>Definition:</b> options.h:24</div></div>
+<div class="ttc" id="classOptions_html_a2849dc13d06cc0fc4e3297be003899b4"><div class="ttname"><a href="classOptions.html#a2849dc13d06cc0fc4e3297be003899b4">Options::depth</a></div><div class="ttdeci">size_t depth</div><div class="ttdoc">Глубина сканирования в папках, задается по умолчанию в конструкторе (0 - без вложенных папок) ...</div><div class="ttdef"><b>Definition:</b> options.h:26</div></div>
+<div class="ttc" id="classOptions_html_a40c0cb1a9e5407df0e9ed3b786b7ea0c"><div class="ttname"><a href="classOptions.html#a40c0cb1a9e5407df0e9ed3b786b7ea0c">Options::paths</a></div><div class="ttdeci">std::vector&lt; fs::path &gt; paths</div><div class="ttdoc">Пути для сканирования файлов </div><div class="ttdef"><b>Definition:</b> options.h:27</div></div>
+<div class="ttc" id="classOptions_html_a3fdb0491f8cebf0a8d1127d6728e8029"><div class="ttname"><a href="classOptions.html#a3fdb0491f8cebf0a8d1127d6728e8029">Options::block</a></div><div class="ttdeci">size_t block</div><div class="ttdoc">Размер блока для чтения с файла и построению по нему хэш суммы для сравнения, задается по умолчанию в...</div><div class="ttdef"><b>Definition:</b> options.h:25</div></div>
+<div class="ttc" id="classOptions_html"><div class="ttname"><a href="classOptions.html">Options</a></div><div class="ttdoc">Класс, для сбора, фильтрации и хранения заданных опций. </div><div class="ttdef"><b>Definition:</b> options.h:21</div></div>
+<div class="ttc" id="classOptions_html_aad972d4c36c16869687c5efc5d0a5f10"><div class="ttname"><a href="classOptions.html#aad972d4c36c16869687c5efc5d0a5f10">Options::exc_paths</a></div><div class="ttdeci">std::vector&lt; fs::path &gt; exc_paths</div><div class="ttdoc">Пути для исключения из сканирования (вложенные так же не будут сканироваться, надо указывать явно в p...</div><div class="ttdef"><b>Definition:</b> options.h:28</div></div>
+<div class="ttc" id="classHFunction_html"><div class="ttname"><a href="classHFunction.html">HFunction</a></div><div class="ttdoc">Интерфейс для реализации функций хэширования. </div><div class="ttdef"><b>Definition:</b> hashfunction.h:12</div></div>
+<div class="ttc" id="hashfunction_8h_html"><div class="ttname"><a href="hashfunction_8h.html">hashfunction.h</a></div></div>
+<div class="ttc" id="classOptions_html_afc5d30d1c9b4b9d744caee2d01ad3f63"><div class="ttname"><a href="classOptions.html#afc5d30d1c9b4b9d744caee2d01ad3f63">Options::hash</a></div><div class="ttdeci">HFunction * hash</div><div class="ttdef"><b>Definition:</b> options.h:30</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.11
+</small></address>
+</body>
+</html>
