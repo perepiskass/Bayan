@@ -4,7 +4,6 @@
 #include <boost/filesystem.hpp>
 #include <fstream>
 #include <iostream>
-
 #include <string>
 
 /**
@@ -16,7 +15,6 @@ class HFunction
 	HFunction();
 	virtual std::string getHash(const char* buf, size_t blockSize)=0;
     virtual ~HFunction()=default;
-	
 };
 
 class CRC32:public HFunction

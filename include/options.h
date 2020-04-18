@@ -29,7 +29,6 @@ class Options
         std::vector<std::regex> v_regex;    ///< Хранит список регулярных выражений для применеия фильтра маски файла
         HFunction* hash = nullptr;
 
-
         Options(int argc, char *argv[]);
         ~Options();
     private:

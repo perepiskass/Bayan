@@ -53,7 +53,6 @@ void Collector::hashCompare(const fs::path& file)
             size_t count_block = fs::file_size(name_vhash.first)/opt->block;
             if(fs::file_size(name_vhash.first)%opt->block) ++count_block;
             
-            // open file
             std::fstream is_one (file.c_str(),std::ios_base::in | std::ios_base::binary);
             if (is_one.is_open()) 
             {   
@@ -92,7 +91,6 @@ void Collector::hashCompare(const fs::path& file)
                                 iqual = false;
                                 break;
                             }
-
                         }
                     }
                     else throw errno;
@@ -148,24 +146,24 @@ std::string Collector::hashFromBlock(std::fstream& is, size_t i, size_t count_bl
 //-----Функция просмотра файлов и фильтрации папок и фалов по заданным параметрам---------------------
 void Collector::iterateOverFiles(size_t depth, fs::path dir)
 {
-        if(pathCompare(dir))
-        {
-            for(const auto& entry : fs::directory_iterator(dir))
-            {   
-                const fs::path file{entry.path()};
-                if(fs::is_directory(file))
+    if(pathCompare(dir))
+    {
+        for(const auto& entry : fs::directory_iterator(dir))
+        {   
+            const fs::path file{entry.path()};
+            if(fs::is_directory(file))
+            {
+                if(depth > 0) iterateOverFiles(depth - 1, file);   
+            }
+            else if(maskCompare(file) && fs::file_size(file) >= opt->size)
+            {
+                if(all_path.empty()) all_path[file];
+                else
                 {
-                    if(depth > 0) iterateOverFiles(depth - 1, file);   
-                }
-                else if(maskCompare(file) && fs::file_size(file) >= opt->size)
-                {
-                    if(all_path.empty()) all_path[file];
-                    else
-                    {
-                        hashCompare(file);
-                    }
+                    hashCompare(file);
                 }
             }
         }
+    }
 }
 
