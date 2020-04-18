@@ -1,6 +1,6 @@
 language: cpp
 before_script:
-- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
+- echo "deb http://archive.ubuntu.com/ubuntu bionic main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get install libboost-all-dev -y
 - sudo apt-get update -qq
 - sudo apt-get install cmake libgtest-dev
