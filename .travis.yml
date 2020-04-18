@@ -3,12 +3,18 @@ before_script:
 - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 - sudo apt-get install libboost-all-dev -y
 - sudo apt-get update -qq
+- sudo apt-get install cmake libgtest-dev
 - sudo apt-get install doxygen
 - sudo apt-get install graphviz
+- cd /usr/src/gtest
+- sudo cmake CMakeLists.txt
+- sudo make
+- sudo cp *.a /usr/lib
 - cd $TRAVIS_BUILD_DIR
 script:
 - cmake .
 - cmake --build .
+- cmake --build . --target test
 - cmake --build . --target package
 - doxygen Doxyfile
 deploy:
