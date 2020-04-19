@@ -151,11 +151,11 @@ void Collector::iterateOverFiles(size_t depth, fs::path dir)
         for(const auto& entry : fs::directory_iterator(dir))
         {   
             const fs::path file{entry.path()};
-            if(fs::is_directory(file))
+            if(fs::is_directory(file) && !fs::is_symlink(file))
             {
                 if(depth > 0) iterateOverFiles(depth - 1, file);   
             }
-            else if(maskCompare(file) && fs::file_size(file) >= opt->size)
+            else if(maskCompare(file) && fs::file_size(file) >= opt->size && !fs::is_symlink(file))
             {
                 if(all_path.empty()) all_path[file];
                 else
