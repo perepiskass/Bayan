@@ -1,9 +1,9 @@
 <map id="include/hashfunction.h" name="include/hashfunction.h">
-<area shape="rect" id="node2" href="$collector_8h.html" title="include/collector.h" alt="" coords="167,155,307,181"/>
-<area shape="rect" id="node4" href="$gtest_8cpp.html" title="source/gtest.cpp" alt="" coords="333,229,463,256"/>
-<area shape="rect" id="node6" href="$options_8h.html" title="include/options.h" alt="" coords="382,80,515,107"/>
-<area shape="rect" id="node8" href="$hashfunction_8cpp.html" title="source/hashfunction.cpp" alt="" coords="540,80,720,107"/>
-<area shape="rect" id="node3" href="$collector_8cpp.html" title="source/collector.cpp" alt="" coords="159,229,309,256"/>
-<area shape="rect" id="node5" href="$main_8cpp.html" title="source/main.cpp" alt="" coords="5,229,135,256"/>
-<area shape="rect" id="node7" href="$options_8cpp.html" title="source/options.cpp" alt="" coords="435,155,579,181"/>
+<area shape="rect" id="node2" href="$collector_8h.html" title="include/collector.h" alt="" coords="167,155,303,181"/>
+<area shape="rect" id="node4" href="$gtest_8cpp.html" title="source/gtest.cpp" alt="" coords="330,229,459,256"/>
+<area shape="rect" id="node6" href="$options_8h.html" title="include/options.h" alt="" coords="377,80,508,107"/>
+<area shape="rect" id="node8" href="$hashfunction_8cpp.html" title="source/hashfunction.cpp" alt="" coords="532,80,711,107"/>
+<area shape="rect" id="node3" href="$collector_8cpp.html" title="source/collector.cpp" alt="" coords="157,229,307,256"/>
+<area shape="rect" id="node5" href="$main_8cpp.html" title="source/main.cpp" alt="" coords="5,229,133,256"/>
+<area shape="rect" id="node7" href="$options_8cpp.html" title="source/options.cpp" alt="" coords="433,155,575,181"/>
 </map>
