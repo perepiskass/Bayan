@@ -155,7 +155,7 @@ void Collector::iterateOverFiles(size_t depth, fs::path dir)
             {
                 if(depth > 0) iterateOverFiles(depth - 1, file);   
             }
-            else if(maskCompare(file) && fs::file_size(file) >= opt->size && !fs::is_symlink(file))
+            else if(!fs::is_symlink(file) && maskCompare(file) && fs::file_size(file) >= opt->size)
             {
                 if(all_path.empty()) all_path[file];
                 else
