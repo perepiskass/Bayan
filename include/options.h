@@ -37,6 +37,6 @@ class Options
         void setExceptPath(const std::vector<std::string>& exc_paths);
         void setHash(const std::string hash_name);
         std::regex makeRegex(const std::string& mask);
-        bool checkPath(const std::string& path);
+        bool checkPath(const std::string& path) const;
 
 };

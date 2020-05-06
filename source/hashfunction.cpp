@@ -3,14 +3,14 @@
 	HFunction::HFunction()
 	{}
 
-	std::string CRC32::getHash(const char* buf, size_t blockSize)
+	std::string CRC32::getHash(const char* buf, size_t blockSize) const
 	{
 		boost::crc_32_type crc_hash;
 		crc_hash.process_bytes(buf, blockSize);
 		return std::to_string(crc_hash.checksum());
 	}
 
-	std::string SHA1::getHash(const char* buf, size_t blockSize)
+	std::string SHA1::getHash(const char* buf, size_t blockSize) const
 	{
 		unsigned resHash[5];
 

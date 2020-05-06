@@ -4,7 +4,7 @@ Collector::Collector(Options* options): opt(options)
 {
 }
 
-std::map<std::string,std::vector<fs::path> > Collector::collect()
+const std::map<std::string,std::vector<fs::path> >& Collector::collect()
 {
     for(const auto& dir : opt->paths)
     {
@@ -14,7 +14,7 @@ std::map<std::string,std::vector<fs::path> > Collector::collect()
 }
 
 //-----Функция сравнения на исключаемые директории------------------------------------------
-bool Collector::pathCompare(const fs::path& dir)
+bool Collector::pathCompare(const fs::path& dir)const
 {
     for(const auto& exc_dir : opt->exc_paths)
     {
@@ -23,7 +23,7 @@ bool Collector::pathCompare(const fs::path& dir)
     return true;
 }
 //-----Функция сравнения на соответствеие маски файла ---------------------------------------
-bool Collector::maskCompare(const fs::path& dir)
+bool Collector::maskCompare(const fs::path& dir)const
 {
     if(opt->v_regex.empty()) return true;
     std::string filename{dir.filename().string()};
@@ -36,7 +36,7 @@ bool Collector::maskCompare(const fs::path& dir)
 }
 
 //-----Функция сравнения размера файла и его пути----------------------------------------
-bool Collector::compareSizeAndDir(const fs::path& file1, const fs::path& file2)
+bool Collector::compareSizeAndDir(const fs::path& file1, const fs::path& file2)const
 {   
     if (fs::file_size(file1) == fs::file_size(file2) && file1!=file2) return true;
     else return false;
@@ -116,31 +116,30 @@ void Collector::hashCompare(const fs::path& file)
 }
 
 //-----Функция получения хэш из блока ----------------------------------------------------
-std::string Collector::hashFromBlock(std::fstream& is, size_t i, size_t count_block)
+std::string Collector::hashFromBlock(std::fstream& is, size_t i, size_t count_block)const
 {
-    char* buffer = new char [opt->block];
-		if(i < count_block-1)
-		{
-			is.seekg (i*opt->block, is.beg);
-			is.read (buffer,opt->block);
-		}
-		else
-		{   
-            is.seekg (0,is.end);
-            auto length_all = is.tellg();
+    std::unique_ptr<char[]> buffer{new char[opt->block]};
+    if(i < count_block-1)
+    {
+        is.seekg (i*opt->block, is.beg);
+        is.read (buffer.get(),opt->block);
+    }
+    else
+    {   
+        is.seekg (0,is.end);
+        auto length_all = is.tellg();
 
-			is.seekg (i*opt->block, is.beg);
-			int length =length_all - is.tellg();
-			is.read (buffer,length);
-			for(uint i = length; i < opt->block; ++i)
-			{
-				buffer[i] = '\0';
-			}
-		}
-		
-		std::string hash_result = opt->hash->getHash(buffer,opt->block);
-		delete [] buffer;
-		return hash_result;
+        is.seekg (i*opt->block, is.beg);
+        int length =length_all - is.tellg();
+        is.read (buffer.get(),length);
+        for(uint i = length; i < opt->block; ++i)
+        {
+            buffer[i] = '\0';
+        }
+    }
+    
+    std::string hash_result = opt->hash->getHash(buffer.get(),opt->block);
+    return hash_result;
 }
 
 //-----Функция просмотра файлов и фильтрации папок и фалов по заданным параметрам---------------------

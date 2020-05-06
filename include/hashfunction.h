@@ -13,20 +13,20 @@ class HFunction
 {
 	public:
 	HFunction();
-	virtual std::string getHash(const char* buf, size_t blockSize)=0;
+	virtual std::string getHash(const char* buf, size_t blockSize)const = 0 ;
     virtual ~HFunction()=default;
 };
 
 class CRC32:public HFunction
 {
 	public:
-	virtual std::string getHash(const char* buf, size_t blockSize) override;
+	virtual std::string getHash(const char* buf, size_t blockSize)const override;
 	~CRC32()=default;
 };
 
 class SHA1:public HFunction
 {
 	public:
-	virtual std::string getHash(const char* buf, size_t blockSize) override;
+	virtual std::string getHash(const char* buf, size_t blockSize)const override;
 	~SHA1()=default;
 };

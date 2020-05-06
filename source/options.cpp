@@ -81,7 +81,7 @@ std::regex Options::makeRegex(const std::string& mask)
     return std::regex{};
 }
 
-bool Options::checkPath(const std::string& dir)
+bool Options::checkPath(const std::string& dir)const
 {
     if(!fs::exists(fs::absolute(fs::path(dir),fs::current_path())))
     {
